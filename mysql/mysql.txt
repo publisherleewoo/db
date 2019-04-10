@@ -1,0 +1,81 @@
+DB모델링:현실세계의 데이터를추출해서 데이터에 넣는것
+
+DBMS :database management software 
+(mysql,maridDB,mongoDB 같은 포멧)
+
+DB 구축 절차
+DB생성->테이블생성->db조회및 활용
+
+Database == schema
+
+워크벤치 쿼리창의 번개(혹은 컨트롤 쉬프트엔터)는 모든쿼리를 실행
+
+단순실행은 컨트롤 엔터 혹은 드래그 쿼리라인에서 번개
+
+
+테이블 관리는 ` (백틱)으로
+create table `my testtbl`;
+drop table `my testtbl`;
+
+
+인덱스로 찾기.
+create INDEX idx_indexTBL_firstname ON indextbl(first_name);
+
+뷰
+create VIEW uv_memTBL 
+AS 
+SELECT membername,memberaddress from membertbl;
+
+
+select * from uv_memtbl;
+
+
+
+구분자.
+DELIMITER //
+
+DELIMITER ;
+
+
+프로시저(일련의 쿼리를 마치 하나의 함수처럼 실행하기 위한 쿼리의 집합)
+DELIMITER //
+
+CREATE PROCEDURE myProc()
+
+BEGIN
+	select * from membertbl where membername ='당탕이';
+	
+	select * from producttbl where productname ='냉장고';
+
+END //
+DELIMITER ;
+CALL myProc();    //호출
+
+
+트리거 설정  (사용자 정보로우 삭제시 다른테이블에 삭제된 정보 저장)
+ (테이블생성)
+CREATE table deleteMembertbl (
+	memberID char(8),
+    memberName char(5),
+    memberAddress char(20),
+    deletedDate date );
+    
+
+
+
+DELIMITER //
+
+CREATE TRIGGER trg_deltedMembertbl
+	// 트리거생성
+AFTER DELETE ON membertbl FOR EACH ROW
+   //   로우가 삭제된 후에
+BEGIN
+ INSERT INTO deleteMembertbl            //  deleteMembertbl 에 넣는다         	
+VALUES (
+	OLD.memberID, OLD.memberName, OLD.memberAddress, CURDATE() );
+ 
+END//
+
+DELIMITER ;
+
+
