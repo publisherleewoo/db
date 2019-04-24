@@ -49,6 +49,7 @@ BEGIN
 
 END //
 DELIMITER ;
+
 CALL myProc();    //호출
 
 
@@ -77,5 +78,50 @@ VALUES (
 END//
 
 DELIMITER ;
+
+
+
+모델만드는법
+
+file->new model-> 그림판에 테이블 아이콘 클릭후 화면 클릭,  table 생성되면 더블클릭
+이런식으로 모델링후 메뮤 database->Forward engineer
+
+
+반대로 테이블을 모델링으로 뽑아내는법
+
+database->reverse engineer
+
+
+
+
+05.MySQL 유틸 사용법
+
+edit ->format ->uppercase 하면 예약어는 대문자로 변환
+
+edt-> format ->Un/comment  하면 주석    -- , /* */
+
+
+
+
+05-2)서버컴퓨터 리눅스환경에서 연결하기
+서버컴퓨터 (이하 리눅스)에서 포트포워딩하고, host네임을 리눅스 ip로 설정
+
+
+
+administration 
+server status:서버상태
+client connections 접속하는 유저
+users and privileges 계정  (계정줄때 중요. administer roles = 롤주기
+ex.관리자:dba,  읽기권한만 필요한 대표는 오른쪽 select권한만 주면된다
+schema privileges ->add entry -> selected schema로 사용할db만 권한을 줄수있다
+설정후 워크벤치 재시작후, 사용자 오른쪽클릭->edit connection 하고 username을 
+위에서 설장한것(login name)을 준것과 비밀번호를 치면 접속가능
+.)  
+
+status and ststem variables 환경변수
+data export: sql 내보내기(백업)
+data import : sql 가져오기
+
+
 
 
